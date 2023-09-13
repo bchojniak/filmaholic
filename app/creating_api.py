@@ -3,7 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 #from taxifare.ml_logic.preprocessor import preprocess_features    -> do this but for our project (getting from cloud)
 #from taxifare.ml_logic.registry import load_model                 -> do this but for our project (getting from cloud)
-
+from data_managing.preprocessor import preprocess_genres, preprocess_tags, title_to_id
+from data_managing.model import top_10_recommendations
 
 app = FastAPI()
 
@@ -16,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-#app.state.model = load_model()
+app.state.model = top_10_recommendations
 
 #no projeto abaixo, usando esses dados, eles fazem um predict do preço da viagem
 #no nosso projeto, vamos usar os inputs pra fazer o predict da sugestao de filme?
@@ -37,13 +38,17 @@ def predict(
     #X_pred = pd.DataFrame(locals(), index=[0])
 
     model = app.state.model
+    assert model is not None
 
-    X_processed = preprocess_features(liked_movies,disliked_movies)
+    liked, disliked = title_to_id(liked_movies: list, disliked_movies: list)
+    like_genres, dislike_genres = preprocess_genres(liked_movies: list, disliked_movies: list)
+    like_dislike_tags = preprocess_tags(liked_movies: list, disliked_movies: list)
 
-    movie_pred = model.predict(X_processed)
+    # liked_processed, disliked_processed = preprocess_features(liked_movies,disliked_movies)
 
-    return (dict('movies_recommended' = str(movie_pred)))
+    suggested_movies, best_movies, worst_movies = model.predict(liked, disliked, like_genres, dislike_genres, like_dislike_tags)
 
+    return suggested_movies
 
 
 @app.get("/")
