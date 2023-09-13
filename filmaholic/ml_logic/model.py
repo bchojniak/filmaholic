@@ -16,11 +16,13 @@ from sklearn.metrics import classification_report
 from sklearn.utils import shuffle
 from sklearn.linear_model import LinearRegression
 
+from filmaholic.ml_logic.data import upload_to_bigquery, upload_to_cloud_platform, get_data_bigquery, get_data_cloud_platform
+from filmaholic.params import *
 
 
 def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genres, dislike_genres, like_dislike_tags):
 
-    # movies_mod = pd.read_csv('data/movies_mod.csv')
+    movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies-mod')
 
     watched = liked_movies + disliked_movies
 
@@ -56,7 +58,7 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
 
     # tags
 
-    movie_tags_df = pd.read_csv('data/final/movie_tags_df.csv')
+    movie_tags_df = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movie-tags-df')
 
     # adding a column with all not watched movies, then merging movie information (genres and tags profiles of movies)
     template_df = pd.DataFrame({'movieId': not_watched}, index= list(range(len(not_watched))))
@@ -95,9 +97,12 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
     del template_df
 
     # loading models
-    genres_model = keras.models.load_model('models/genres_model.h5', compile=True)
-    tags_model = pickle.load(open('models/tags_model.sav', 'rb'))
-    combine_model = pickle.load(open('models/combine_model.sav', 'rb'))
+    genres_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'genres_model', 'genres_model', '.h5')
+    # genres_model = keras.models.load_model('models/genres_model.h5', compile=True)
+    tags_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'tags_model', 'tags_model', '.sav')
+    # tags_model = pickle.load(open('models/tags_model.sav', 'rb'))
+    combine_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'combine_model', 'combine_model', '.sav')
+    # combine_model = pickle.load(open('models/combine_model.sav', 'rb'))
 
     # predicting with the genres and tags models
     genres_model_predictions = (genres_model.predict(x= [genres_like_input, genres_dislike_input, genres_movie_input])) * 5

@@ -6,8 +6,12 @@ import numpy as np
 from pathlib import Path
 from google.cloud import bigquery
 
+from filmaholic.ml_logic.data import upload_to_bigquery, upload_to_cloud_platform, get_data_bigquery, get_data_cloud_platform
+from filmaholic.params import *
+
 def title_to_id(liked_movies: list, disliked_movies: list):
-    # movies_mod = pd.read_csv('data/movies_mod.csv')
+
+    movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies-mod')
 
     liked_movies_df = pd.DataFrame({'title': liked_movies})
     disliked_movies_df = pd.DataFrame({'title': disliked_movies})
@@ -85,12 +89,14 @@ def preprocess_tags(liked_movies: list, disliked_movies: list):
     like_tags_df = pd.DataFrame()
     dislike_tags_df = pd.DataFrame()
 
+    vectorized_dict = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'vectorized_dict', 'vectorized_dict', '.pkl')
+
     # with open('data/vectorized_dict.pkl', 'rb') as reader:
     #   vectorized_dict = pickle.load(reader)
 
     for index, row in liked_movies_df.iterrows():
 
-        # temp_movie_df = pd.read_csv('data/movies_tags/{}.csv'.format(str(int(row.movieId))))
+        temp_movie_df = get_data_bigquery(GCP_PROJECT, BQ_DATASET_MOVIES_TAGS, f'{str(int(row.movieId))}')
 
         if len(like_tags_df) == 0:
             like_tags_df = temp_movie_df
@@ -99,7 +105,7 @@ def preprocess_tags(liked_movies: list, disliked_movies: list):
 
     for index, row in disliked_movies_df.iterrows():
 
-        # temp_movie_df = pd.read_csv('data/movies_tags/{}.csv'.format(str(int(row.movieId))))
+        temp_movie_df = get_data_bigquery(GCP_PROJECT, BQ_DATASET_MOVIES_TAGS, f'{str(int(row.movieId))}')
 
         if len(dislike_tags_df) == 0:
             dislike_tags_df = temp_movie_df
