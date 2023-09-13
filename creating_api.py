@@ -42,7 +42,7 @@ def predict(
 
     movie_pred = model.predict(X_processed)
 
-    return (dict(movies_recommended = str(movie_pred)))
+    return (dict('movies_recommended' = str(movie_pred)))
 
 
 
