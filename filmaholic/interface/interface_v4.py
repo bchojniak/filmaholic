@@ -37,7 +37,7 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
         
         # checks if the request was successful; add genre to return term if we want to include
         data = response.json()
-        return recommendations['title']
+        return data['title']
         # else:
         #     st.error(f"Error fetching recommendations: {response.status_code}")
         #     return []
@@ -63,7 +63,7 @@ def simulate_loading():
 # button on UI to get recommendations
 # need to add genres to st.button once we can load them
 if st.button("Get My Movie Recommendations!"):
-    simulate_loading()
+    # simulate_loading()
     recommendations = get_recommendations_and_genres(selected_movies_best, selected_movies_least_liked, url)
 
     if recommendations:
