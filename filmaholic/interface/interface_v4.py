@@ -26,9 +26,8 @@ selected_movies = selected_movies_best + selected_movies_least_liked
 # function to receive movie recommendations and top genres from API
 def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike):
     try:
-        # JSON payload with selected movies
         
-        }
+        # JSON payload with selected movies
         params = {
         'liked_movies': selected_movies_fav,  
         'disliked_movies': selected_movies_dislike
