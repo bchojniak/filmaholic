@@ -40,11 +40,11 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike)
             return recommendations
         else:
             st.error(f"Error fetching recommendations: {response.status_code}")
-            return [], []
+            return []
 
     except requests.exceptions.RequestException as e:
         st.error(f"API request error: {e}")
-        return [], []
+        return []
 
 # button on UI to get recommendations
 # need to add genres to st.button once we can load them
