@@ -26,7 +26,6 @@ selected_movies = selected_movies_best + selected_movies_least_liked
 # function to receive movie recommendations and top genres from API
 def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike, url):
     try:
-        
         # JSON payload with selected movies
         params = {
         'liked_movies': selected_movies_fav,  
@@ -37,12 +36,11 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
         response = requests.post(url, json=params)
         
         # checks if the request was successful; add genre to return term if we want to include
-        if response.status_code == 200:
-            data = response.json()
-            return recommendations['title']
-        else:
-            st.error(f"Error fetching recommendations: {response.status_code}")
-            return []
+        data = response.json()
+        return recommendations['title']
+        # else:
+        #     st.error(f"Error fetching recommendations: {response.status_code}")
+        #     return []
 
     except requests.exceptions.RequestException as e:
         st.error(f"API request error: {e}")
