@@ -22,7 +22,7 @@ from filmaholic.params import *
 from filmaholic.ml_logic.preprocessor import title_to_id
 
 
-def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genres, dislike_genres, like_dislike_tags):
+def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genres, dislike_genres, like_dislike_tags, genres_model, tags_model, combine_model):
 
     liked_movies, disliked_movies = title_to_id(liked_movies, disliked_movies)
 
@@ -108,11 +108,11 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
     del template_df
 
     # loading models
-    genres_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'genres_model', 'genres_model', '.h5')
+    # genres_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'genres_model', 'genres_model', '.h5')
     # genres_model = keras.models.load_model('models/genres_model.h5', compile=True)
-    tags_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'tags_model', 'tags_model', '.sav')
+    # tags_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'tags_model', 'tags_model', '.sav')
     # tags_model = pickle.load(open('models/tags_model.sav', 'rb'))
-    combine_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'combine_model', 'combine_model', '.sav')
+    # combine_model = get_data_cloud_platform(GCP_PROJECT, BUCKET_NAME, 'combine_model', 'combine_model', '.sav')
     # combine_model = pickle.load(open('models/combine_model.sav', 'rb'))
 
     # predicting with the genres and tags models
