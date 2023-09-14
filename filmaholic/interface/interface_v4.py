@@ -27,13 +27,15 @@ selected_movies = selected_movies_best + selected_movies_least_liked
 def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike):
     try:
         # JSON payload with selected movies
-        payload = {
-            "liked_movies": selected_movies_fav,
-            "disliked_movies": selected_movies_dislike
+        
+        }
+        params = {
+        'liked_movies': selected_movies_fav,  
+        'disliked_movies': selected_movies_dislike
         }
 
         # Make a POST request to the recommendations endpoint
-        response = requests.get(recommendations_endpoint, params=payload)
+        response = requests.post(url, json=params)
 
         # checks if the request was successful; add genre to return term if we want to include
         if response.status_code == 200:
