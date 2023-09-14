@@ -1,4 +1,4 @@
-Please select movie!
+Please select or type a movie!
 Toy Story (1995)
 Jumanji (1995)
 Heat (1995)
