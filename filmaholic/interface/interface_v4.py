@@ -41,7 +41,7 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
             data = response.json()
             recommendations = data.get("Suggested Movies", [])
             # top_genres = data.get("Top Genres", [])
-            return recommendations
+            return recommendations['title']
         else:
             st.error(f"Error fetching recommendations: {response.status_code}")
             return []
