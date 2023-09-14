@@ -5,7 +5,7 @@ import time
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
-recommendations_endpoint = "http://localhost:8000/predict"
+recommendations_endpoint = "us.gcr.io/filmaholic-398017/filmaholic-api@sha256:71262b46c56dd014ff72cf906b4c5886f4da6a0cacba72a907adbdae9b6fcee9"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 with open("filmaholic/interface/movies2.txt", "r", encoding="cp1252") as file:
