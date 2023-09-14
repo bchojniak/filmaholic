@@ -5,7 +5,7 @@ import requests
 recommendations_endpoint = "http://localhost:8000/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-with open("movies2.txt", "r", encoding="cp1252") as file:
+with open("filmaholic/interface/movies2.txt", "r", encoding="cp1252") as file:
     movies_list = [line.strip() for line in file]
 
 st.subheader("Select Your Top 5 Best Movies:")
@@ -33,7 +33,7 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike)
         if response.status_code == 200:
             data = response.json()
             recommendations = data.get("Suggested Movies", [])
-            top_genres = data.get("Top Genres", [])
+            # top_genres = data.get("Top Genres", [])
             return recommendations, top_genres
         else:
             st.error(f"Error fetching recommendations: {response.status_code}")
