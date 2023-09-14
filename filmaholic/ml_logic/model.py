@@ -24,6 +24,8 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
 
     movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies-mod')
 
+
+
     watched = liked_movies + disliked_movies
 
     # identifying not watched movies
