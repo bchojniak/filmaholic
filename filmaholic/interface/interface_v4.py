@@ -33,14 +33,11 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
         'disliked_movies': selected_movies_dislike
         }
 
-        # Make a POST request to the recommendations endpoint
-        response = requests.post(url, json=params)
-
         # checks if the request was successful; add genre to return term if we want to include
         if response.status_code == 200:
-            data = response.json()
-            recommendations = data.get("Suggested Movies", [])
-            # top_genres = data.get("Top Genres", [])
+            # Make a POST request to the recommendations endpoint
+            response = requests.post(url, json=params)
+            data = return.json()
             return recommendations['title']
         else:
             st.error(f"Error fetching recommendations: {response.status_code}")
