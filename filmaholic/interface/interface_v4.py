@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 
+st.title("Get Your AI-Powered Movie Recommendations", anchor="center")
+
 # API endpoint 
 recommendations_endpoint = "http://localhost:8000/predict"
 
