@@ -5,3 +5,4 @@ combine_model.sav
 genres_model.h5
 tags_model.sav
 
+*.pyc
