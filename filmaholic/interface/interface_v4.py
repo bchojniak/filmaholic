@@ -8,7 +8,7 @@ st.write("Instructions: Select your top 5 favorite and top 5 least liked movies,
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
-recommendations_endpoint = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/"
+recommendations_endpoint = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 with open("filmaholic/interface/movies2.txt", "r", encoding="cp1252") as file:
