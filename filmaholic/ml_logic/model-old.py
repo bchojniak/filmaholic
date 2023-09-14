@@ -19,17 +19,12 @@ from sklearn.linear_model import LinearRegression
 from filmaholic.ml_logic.data import upload_to_bigquery, upload_to_cloud_platform, get_data_bigquery, get_data_cloud_platform
 from filmaholic.params import *
 
-from filmaholic.ml_logic.preprocessor import title_to_id
-
 
 def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genres, dislike_genres, like_dislike_tags):
 
-    liked_movies, disliked_movies = title_to_id(liked_movies, disliked_movies)
+    movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies-mod')
 
-    liked_movies = list(liked_movies.movieId)
-    disliked_movies = list(disliked_movies.movieId)
 
-    movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies_mod')
 
     watched = liked_movies + disliked_movies
 
@@ -65,7 +60,7 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
 
     # tags
 
-    movie_tags_df = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movie_tags_df')
+    movie_tags_df = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movie-tags-df')
 
     # adding a column with all not watched movies, then merging movie information (genres and tags profiles of movies)
     template_df = pd.DataFrame({'movieId': not_watched}, index= list(range(len(not_watched))))

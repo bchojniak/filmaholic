@@ -11,7 +11,7 @@ from filmaholic.params import *
 
 def title_to_id(liked_movies: list, disliked_movies: list):
 
-    movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies_mod')
+    movies_mod = get_data_bigquery(GCP_PROJECT, BQ_DATASET, 'movies-mod')
 
     liked_movies_df = pd.DataFrame({'title': liked_movies})
     disliked_movies_df = pd.DataFrame({'title': disliked_movies})
@@ -32,13 +32,13 @@ def preprocess_genres(liked_movies: list, disliked_movies: list):
     disliked_movies_df = disliked_movies_df.iloc[:, 4:]
 
     liked_total_counts = 0
-    liked_dict = {'War': 0, 'Animation': 0, 'Horror': 0, 'SciFi': 0, 'Fantasy': 0, 'Thriller': 0, 'Crime': 0, 'Mystery': 0,
-                    'Documentary': 0, 'Children': 0, 'Action': 0, 'Adventure': 0, 'Musical': 0,'FilmNoir': 0, 'Drama': 0,
+    liked_dict = {'War': 0, 'Animation': 0, 'Horror': 0, 'Sci-Fi': 0, 'Fantasy': 0, 'Thriller': 0, 'Crime': 0, 'Mystery': 0,
+                    'Documentary': 0, 'Children': 0, 'Action': 0, 'Adventure': 0, 'Musical': 0,'Film-Noir': 0, 'Drama': 0,
                     'Romance': 0, 'Comedy': 0, 'Western': 0, 'None': 0}
 
     disliked_total_counts = 0
-    disliked_dict = {'War': 0, 'Animation': 0, 'Horror': 0, 'SciFi': 0, 'Fantasy': 0, 'Thriller': 0, 'Crime': 0, 'Mystery': 0,
-                    'Documentary': 0, 'Children': 0, 'Action': 0, 'Adventure': 0, 'Musical': 0,'FilmNoir': 0, 'Drama': 0,
+    disliked_dict = {'War': 0, 'Animation': 0, 'Horror': 0, 'Sci-Fi': 0, 'Fantasy': 0, 'Thriller': 0, 'Crime': 0, 'Mystery': 0,
+                    'Documentary': 0, 'Children': 0, 'Action': 0, 'Adventure': 0, 'Musical': 0,'Film-Noir': 0, 'Drama': 0,
                     'Romance': 0, 'Comedy': 0, 'Western': 0, 'None': 0}
 
     for genre in list(liked_movies_df.columns):
