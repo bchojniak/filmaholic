@@ -32,11 +32,12 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike)
         response = requests.get(recommendations_endpoint, params=payload)
 
         # check if the request was successful
+        # add genre to return term once setup
         if response.status_code == 200:
             data = response.json()
             recommendations = data.get("Suggested Movies", [])
             # top_genres = data.get("Top Genres", [])
-            return recommendations, top_genres
+            return recommendations
         else:
             st.error(f"Error fetching recommendations: {response.status_code}")
             return [], []
