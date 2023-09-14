@@ -8,7 +8,7 @@ st.write("Instructions: Select your top 5 favorite and top 5 least liked movies,
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
-recommendations_endpoint = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
+url = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 with open("filmaholic/interface/movies2.txt", "r", encoding="cp1252") as file:
@@ -24,7 +24,7 @@ selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}"
 selected_movies = selected_movies_best + selected_movies_least_liked
 
 # function to receive movie recommendations and top genres from API
-def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike):
+def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike, url):
     try:
         
         # JSON payload with selected movies
@@ -68,7 +68,7 @@ def simulate_loading():
 # need to add genres to st.button once we can load them
 if st.button("Get My Movie Recommendations!"):
     simulate_loading()
-    recommendations = get_recommendations_and_genres(selected_movies_best, selected_movies_least_liked)
+    recommendations = get_recommendations_and_genres(selected_movies_best, selected_movies_least_liked, url)
 
     if recommendations:
         st.subheader("Your Top 10 Recommended Movies:")
