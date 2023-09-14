@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-st.title("Get Your AI-Powered Movie Recommendations", anchor="center")
+st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
 recommendations_endpoint = "http://localhost:8000/predict"
@@ -11,10 +11,10 @@ with open("filmaholic/interface/movies2.txt", "r", encoding="cp1252") as file:
     movies_list = [line.strip() for line in file]
 
 st.subheader("Select Your Favorite Movies:")
-selected_movies_best = [st.selectbox(f"Select Movie (Best) {i+1}", movies_list, key=f"best_movie_{i}") for i in range(5)]
+selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list, key=f"best_movie_{i}") for i in range(5)]
 
 st.subheader("Select Your Least Favorite Movies:")
-selected_movies_least_liked = [st.selectbox(f"Select Movie (Least Liked) {i+1}", movies_list, key=f"least_liked_movie_{i}") for i in range(5)]
+selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list, key=f"least_liked_movie_{i}") for i in range(5)]
 
 # combining most liked and disliked into single list for API
 selected_movies = selected_movies_best + selected_movies_least_liked
