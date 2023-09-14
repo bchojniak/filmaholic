@@ -44,8 +44,9 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike)
         return [], []
 
 # button on UI to get recommendations
+# need to add genres to st.button once we can load them
 if st.button("Get My Movie Recommendations!"):
-    recommendations, top_genres = get_recommendations_and_genres(selected_movies_best, selected_movies_least_liked)
+    recommendations = get_recommendations_and_genres(selected_movies_best, selected_movies_least_liked)
 
     if recommendations:
         st.subheader("Your Top 10 Recommended Movies:")
@@ -55,9 +56,9 @@ if st.button("Get My Movie Recommendations!"):
         st.info("No recommendations available based on your selections.")
 
     # Display top genres
-    st.subheader("Top Genres Based on Your Selections:")
-    for i, genre in enumerate(top_genres):
-        st.write(f"{i+1}. {genre}")
+    # st.subheader("Top Genres Based on Your Selections:")
+    # for i, genre in enumerate(top_genres):
+    #    st.write(f"{i+1}. {genre}")
 
 if __name__ == "__main__":
     st.set_page_config(page_title="Your Personalized Movie Recommendations")
