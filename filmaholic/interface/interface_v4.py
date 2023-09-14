@@ -68,7 +68,7 @@ if st.button("Get My Movie Recommendations!"):
 
     if recommendations:
         st.subheader("Your Top 10 Recommended Movies:")
-        for i, movie in enumerate(recommendations):
+        for i, movie in enumerate(recommendations.values()):
             st.write(f"{i+1}. {movie}")
     else:
         st.info("No recommendations available based on your selections.")
