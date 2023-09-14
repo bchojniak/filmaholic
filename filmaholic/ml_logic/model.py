@@ -92,8 +92,12 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
 
     # separating the 3 inputs for the neural network
     genres_like_input = template_df.loc[:, like_columns_modified]
+    genres_like_input = np.asarray(genres_like_input).astype(np.float32)
     genres_dislike_input = template_df.loc[:, dislike_columns_modified]
+    genres_dislike_input = np.asarray(genres_like_input).astype(np.float32)
     genres_movie_input = template_df.loc[:, like_columns]
+    genres_movie_input = np.asarray(genres_like_input).astype(np.float32)
+
 
     # separating the input for the random forest
     tags_input = template_df.loc[:, rf_columns]
@@ -112,7 +116,7 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
     # combine_model = pickle.load(open('models/combine_model.sav', 'rb'))
 
     # predicting with the genres and tags models
-    genres_model_predictions = (genres_model.predict(x= [genres_like_input, genres_dislike_input, genres_movie_input])) * 5
+    genres_model_predictions = (genres_model.predict(x=[genres_like_input, genres_dislike_input, genres_movie_input])) * 5
     tags_model_predictions = tags_model.predict(tags_input)
 
     # transforming the neural network prediction into a list

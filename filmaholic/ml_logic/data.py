@@ -1,4 +1,4 @@
-import re, os, math, datetime, pickle
+import re, os, math, datetime, pickle, joblib
 
 import pandas as pd
 import numpy as np
@@ -80,10 +80,10 @@ def get_data_cloud_platform(
         file = keras.models.load_model(f'{file_name_local}.h5', compile=True)
 
     if format == '.sav':
-        file = pickle.load(open(f'{file_name_local}.sav', 'rb'))
+        file = joblib.load(open(f'{file_name_local}.sav', 'rb'))
 
     if format == '.pkl':
         with open(f'{file_name_local}.pkl', 'rb') as reader:
-            file = pickle.load(reader)
+            file = joblib.load(reader)
 
     return file
