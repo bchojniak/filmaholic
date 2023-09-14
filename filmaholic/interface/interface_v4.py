@@ -2,6 +2,9 @@ import streamlit as st
 import requests
 import time
 
+st.set_page_config(page_title="Your Personalized Movie Recommendations")
+st.write("Instructions: Select your top 5 favorite and top 5 least liked movies, and click 'Get Recommendations' to view movie recommendations and top genres.")
+
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
@@ -77,7 +80,3 @@ if st.button("Get My Movie Recommendations!"):
     # st.subheader("Top Genres Based on Your Selections:")
     # for i, genre in enumerate(top_genres):
     #    st.write(f"{i+1}. {genre}")
-
-if __name__ == "__main__":
-    st.set_page_config(page_title="Your Personalized Movie Recommendations")
-    st.write("Instructions: Select your top 5 favorite and top 5 least liked movies, and click 'Get Recommendations' to view movie recommendations and top genres.")
