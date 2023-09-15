@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import time
+import pandas as pd
 
 st.set_page_config(page_title="Your Personalized Movie Recommendations")
 st.write("Instructions: Select your top 5 favorite and top 5 least liked movies, and click 'Get Recommendations' to view movie recommendations and top genres.")
@@ -11,8 +12,8 @@ st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="cente
 url = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-with open("filmaholic/interface/movies3.txt", "r", encoding="utf-8", errors="ignore") as file:
-    movies_list = [line.strip() for line in file]
+movies_df = pd.read_csv("filmaholic/interface/movies.csv", encoding="utf-8", errors="ignore")
+movies_list = movies_df["Movie Name"].tolist()
 
 st.subheader("Select Your Favorite Movies:")
 selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list, key=f"best_movie_{i}") for i in range(5)]
