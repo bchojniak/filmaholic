@@ -9,7 +9,7 @@ st.write("Instructions: Select your top 5 favorite and top 5 least liked movies,
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
-url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.app"
+url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 movies_df = pd.read_csv("filmaholic/interface/movies.csv", encoding="utf-8")
