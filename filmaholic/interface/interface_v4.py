@@ -38,7 +38,7 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
         
         # checks if the request was successful; add genre to return term if we want to include
         data = response.json()
-        return data['Suggested Movies']['title']
+        return data['Suggested Movies']
         # else:
         #     st.error(f"Error fetching recommendations: {response.status_code}")
         #     return []
