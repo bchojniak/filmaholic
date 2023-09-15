@@ -12,8 +12,8 @@ st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="cente
 url = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-movies_df = pd.read_csv("filmaholic/interface/movies.csv", encoding="utf-8")
-movies_list = movies_df["Movie Name"].tolist()
+with open("filmaholic/interface/movies3.txt", "r", encoding="utf-8", errors="ignore") as file:
+    movies_list = [line.strip() for line in file]
 
 st.subheader("Select Your Favorite Movies:")
 selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list, key=f"best_movie_{i}") for i in range(5)]
@@ -78,3 +78,4 @@ if st.button("Get My Movie Recommendations!"):
     # st.subheader("Top Genres Based on Your Selections:")
     # for i, genre in enumerate(top_genres):
     #    st.write(f"{i+1}. {genre}")
+
