@@ -12,7 +12,7 @@ st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="cente
 url = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-with open("filmaholic/interface/movies3.txt", "r", encoding="utf-8", errors="ignore") as file:
+with open("filmaholic/interface/movies2.txt", "r", encoding="utf-8", errors="ignore") as file:
     movies_list = [line.strip() for line in file]
 
 st.subheader("Select Your Favorite Movies:")
