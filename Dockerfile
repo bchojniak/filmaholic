@@ -1,12 +1,13 @@
 FROM python:3.10.6-buster
 
+COPY filmaholic /filmaholic
 COPY app /app
 COPY requirements.txt /requirements.txt
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --no-cache-dir
 
-CMD uvicorn app.creating_api:app --host 0.0.0.0
+CMD uvicorn app.creating_api:app --host 0.0.0.0 --port $PORT
 
 # # $DEL_BEGIN
 
