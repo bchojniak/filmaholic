@@ -14,15 +14,16 @@ url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.ap
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 movies_df = pd.read_csv("filmaholic/interface/movies_mod_ordered.csv")
 movies_list = list(movies_df['title'])
+movies_list = ["Please select or type a movie title!"] + movies_list
 movies_list_clean = []
 for movie in movies_list:
     movies_list_clean.append(movie)
 
 st.subheader("Select Your Favorite Movies:")
-selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list_clean, key=f"best_movie_{i}", placeholder="Please select or type a movie title!") for i in range(5)]
+selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list_clean, key=f"best_movie_{i}") for i in range(5)]
 
 st.subheader("Select Your Least Favorite Movies:")
-selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list_clean, key=f"least_liked_movie_{i}", placeholder="Please select or type a movie title!") for i in range(5)]
+selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list_clean, key=f"least_liked_movie_{i}") for i in range(5)]
 
 # combining most liked and disliked into single list for API
 selected_movies = selected_movies_best + selected_movies_least_liked
