@@ -152,8 +152,8 @@ def top_10_recommendations(liked_movies: list, disliked_movies: list, like_genre
                               index= list(range(len(movieId_list))))
 
     # getting top and bottom predictions
-    best_movies_df = predictions_df.sort_values(by=['prediction'], ascending=False).iloc
-    worst_movies_df = predictions_df.sort_values(by=['prediction'], ascending=True).iloc
+    best_movies_df = predictions_df.sort_values(by=['prediction'], ascending=False)
+    worst_movies_df = predictions_df.sort_values(by=['prediction'], ascending=True)
 
     # adding rest of information about the movie
     best_movies_df = best_movies_df.merge(movies_mod, how= 'left', on= 'movieId').dropna()
