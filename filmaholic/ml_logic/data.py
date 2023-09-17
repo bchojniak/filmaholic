@@ -53,7 +53,7 @@ def get_data_bigquery(
 
     query = f'SELECT * FROM `{project}.{dataset}.{table_name}`'
 
-    client = bigquery.Client(project=project)
+    client = bigquery.Client()
     query_job = client.query(query)
     result = query_job.result()
     df = result.to_dataframe()
