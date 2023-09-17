@@ -9,17 +9,20 @@ st.write("Instructions: Select your top 5 favorite and top 5 least liked movies,
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint 
-url = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
+url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-with open("filmaholic/interface/movies2.txt", "r", encoding="utf-8", errors="ignore") as file:
-    movies_list = [line.strip() for line in file]
+movies_df = pd.read_csv("filmaholic/interface/movies.csv")
+movies_list = list(movies_df['Movie Name'])
+movies_list_clean = []
+for movie in movies_list:
+    movies_list_clean.append(movie)
 
 st.subheader("Select Your Favorite Movies:")
-selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list, key=f"best_movie_{i}") for i in range(5)]
+selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list_clean, key=f"best_movie_{i}") for i in range(5)]
 
 st.subheader("Select Your Least Favorite Movies:")
-selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list, key=f"least_liked_movie_{i}") for i in range(5)]
+selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list_clean, key=f"least_liked_movie_{i}") for i in range(5)]
 
 # combining most liked and disliked into single list for API
 selected_movies = selected_movies_best + selected_movies_least_liked
@@ -39,9 +42,6 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
         # checks if the request was successful; add genre to return term if we want to include
         data = response.json()
         return data['Suggested Movies']['title']
-        # else:
-        #     st.error(f"Error fetching recommendations: {response.status_code}")
-        #     return []
 
     except requests.exceptions.RequestException as e:
         st.error(f"API request error: {e}")
@@ -64,7 +64,7 @@ def simulate_loading():
 # button on UI to get recommendations
 # need to add genres to st.button once we can load them
 if st.button("Get My Movie Recommendations!"):
-    # simulate_loading()
+    simulate_loading()
     recommendations = get_recommendations_and_genres(selected_movies_best, selected_movies_least_liked, url)
 
     if recommendations:
