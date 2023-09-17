@@ -19,10 +19,10 @@ for movie in movies_list:
     movies_list_clean.append(movie)
 
 st.subheader("Select Your Favorite Movies:")
-selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list, key=f"best_movie_{i}") for i in range(5)]
+selected_movies_best = [st.selectbox(f"Select Favorite Movie {i+1}", movies_list_clean, key=f"best_movie_{i}") for i in range(5)]
 
 st.subheader("Select Your Least Favorite Movies:")
-selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list, key=f"least_liked_movie_{i}") for i in range(5)]
+selected_movies_least_liked = [st.selectbox(f"Select Least Favorite Movie {i+1}", movies_list_clean, key=f"least_liked_movie_{i}") for i in range(5)]
 
 # combining most liked and disliked into single list for API
 selected_movies = selected_movies_best + selected_movies_least_liked
