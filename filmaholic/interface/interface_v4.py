@@ -9,7 +9,7 @@ st.write("Instructions: Select your top 5 favorite and top 5 least liked movies,
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
 # API endpoint
-url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.app/predict"
+url = "https://filmaholic-api-extended-dataset-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 movies_df = pd.read_csv("filmaholic/interface/movies_mod_ordered.csv")
@@ -42,7 +42,7 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
 
         # checks if the request was successful; add genre to return term if we want to include
         data = response.json()
-        return data['movies']['title'][:10]
+        return data['movies']['title']
 
     except requests.exceptions.RequestException as e:
         st.error(f"API request error: {e}")
