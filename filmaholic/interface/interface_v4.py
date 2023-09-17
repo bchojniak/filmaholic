@@ -12,8 +12,8 @@ st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="cente
 url = "https://filmaholic-api-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-movies_df = pd.read_csv("filmaholic/interface/movies.csv", header=False)
-movies_list = list(movies_df)
+movies_df = pd.read_csv("filmaholic/interface/movies.csv")
+movies_list = list(movies_df['Movie Name'])
 movies_list_clean = []
 for movie in movies_list:
     movies_list_clean.append(movie)
