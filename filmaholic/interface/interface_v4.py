@@ -8,12 +8,12 @@ st.write("Instructions: Select your top 5 favorite and top 5 least liked movies,
 
 st.title("Get Your AI-Powered Movie Recommendations 🎬🤖🍿", anchor="center")
 
-# API endpoint 
+# API endpoint
 url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.app/predict"
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
-movies_df = pd.read_csv("filmaholic/interface/movies.csv")
-movies_list = list(movies_df['Movie Name'])
+movies_df = pd.read_csv("filmaholic/interface/movies_mod_ordered.csv")
+movies_list = list(movies_df['title'])
 movies_list_clean = []
 for movie in movies_list:
     movies_list_clean.append(movie)
@@ -32,16 +32,16 @@ def get_recommendations_and_genres(selected_movies_fav, selected_movies_dislike,
     try:
         # JSON payload with selected movies
         params = {
-        'liked_movies': selected_movies_fav,  
+        'liked_movies': selected_movies_fav,
         'disliked_movies': selected_movies_dislike
         }
 
         # Make a POST request to the recommendations endpoint
         response = requests.post(url, json=params)
-        
+
         # checks if the request was successful; add genre to return term if we want to include
         data = response.json()
-        return data['Suggested Movies']['title']
+        return data['movies']['title'][:10]
 
     except requests.exceptions.RequestException as e:
         st.error(f"API request error: {e}")
@@ -78,4 +78,3 @@ if st.button("Get My Movie Recommendations!"):
     # st.subheader("Top Genres Based on Your Selections:")
     # for i, genre in enumerate(top_genres):
     #    st.write(f"{i+1}. {genre}")
-
