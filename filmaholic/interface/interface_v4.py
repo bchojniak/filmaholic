@@ -13,7 +13,8 @@ url = "https://filmaholic-api-filmaholic-extended-dataset-cogu3u3naq-uc.a.run.ap
 
 # reads list of movies saved in this text file, needs to be updated once new movies added; note: ASIN formatting
 movies_df = pd.read_csv("filmaholic/interface/movies_mod_ordered.csv")
-movies_list = list(["Please select or type a movie title!"] + movies_df['title'])
+movies_list = list(movies_df['title'])
+movies_list = ["Please select or type a movie title!"] + movies_list
 movies_list_clean = []
 for movie in movies_list:
     movies_list_clean.append(movie)
